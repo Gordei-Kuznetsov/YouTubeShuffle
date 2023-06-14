@@ -1,0 +1,35 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube Shuffle",
+    "description": "Shuffle your playlists in YouTube randomly",
+    "version": "1.0",
+    "permissions": [
+        "storage",
+        "scripting"
+    ],
+    "icons": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    },
+    "action": {
+      "default_popup": "hello.html",
+      "default_icon": "hello_extensions.png"
+    },
+    "content_scripts": [
+        {
+          "js": ["scripts/playlist.js"],
+          "matches": [
+            "https://www.youtube.com/playlist?list=*"
+          ]
+        },
+        {
+            "js": ["scripts/watch.js"],
+            "matches": [
+              "https://www.youtube.com/watch?v=*&list=*",
+              "https://www.youtube.com/watch?list=*&v=*"
+            ]
+        }
+      ]
+  }

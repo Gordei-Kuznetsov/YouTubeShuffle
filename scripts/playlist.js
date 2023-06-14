@@ -1,0 +1,1 @@
+let shuffleButton = document.getElementsByClassName("shuffle-button")[0]
