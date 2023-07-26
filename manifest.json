@@ -14,22 +14,48 @@
         "128": "images/icon-128.png"
     },
     "action": {
-      "default_popup": "hello.html",
-      "default_icon": "hello_extensions.png"
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    }
     },
     "content_scripts": [
-        {
-          "js": ["scripts/playlist.js"],
-          "matches": [
-            "https://www.youtube.com/playlist?list=*"
-          ]
-        },
-        {
-            "js": ["scripts/watch.js"],
-            "matches": [
-              "https://www.youtube.com/watch?v=*&list=*",
-              "https://www.youtube.com/watch?list=*&v=*"
-            ]
-        }
-      ]
+      {
+        "name": "PLAYLIST_PAGE",
+        "js": ["scripts/playlist.js"],
+        "run_at": "document_end",
+        "matches": [
+          "https://www.youtube.com/playlist?list=*"
+        ]
+      },
+      {
+        "name": "WATCH_PAGE",
+        "js": ["scripts/watch.js"],
+        "run_at": "document_end",
+        "matches": [
+          "https://www.youtube.com/watch?*list=*"
+        ]
+      },
+      {
+        "name": "GENERAL_PAGE",
+        "js": ["scripts/general.js"],
+        "run_at": "document_end",
+        "matches": [
+          "https://www.youtube.com/*"
+        ],
+        "exclude_matches": [
+          "https://www.youtube.com/playlist?list=*",
+          "https://www.youtube.com/watch?*list=*"
+        ]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [ "common/*" ],
+        "matches": [
+          "https://www.youtube.com/*"
+        ]
+      }
+    ]
   }
